@@ -1,0 +1,49 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace ConstructionLine.CodingChallenge
+{
+    public class Size : IComparable<Size>
+    {
+        public Guid Id { get; }
+
+        public string Name { get; }
+
+        private Size(Guid id, string name)
+        {
+            Id = id;
+            Name = name;
+        }
+        
+        public static Size Small = new Size(Guid.NewGuid(), "Small");
+        public static Size Medium = new Size(Guid.NewGuid(), "Medium");
+        public static Size Large = new Size(Guid.NewGuid(), "Large");
+        
+        public static List<Size> All = 
+            new List<Size>
+            {
+                Small,
+                Medium,
+                Large
+            };
+
+        public int CompareTo(Size other)
+        {
+            var hash = this.GetHashCode();
+            var otherHash = other.GetHashCode();
+
+            if (hash < otherHash)
+            {
+                return 1;
+            }
+            else if (hash > otherHash)
+            {
+                return -1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+    }
+}
